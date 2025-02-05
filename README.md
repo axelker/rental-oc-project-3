@@ -35,7 +35,7 @@ Create an .env file with the necessary variables (examples with .env.sample)
    env-cmd -f .env mvn spring-boot:run
    ```
 
-The application will be available at: **http://localhost:8080**
+The application will be available at: **http://localhost:3001**
 
 ---
 
