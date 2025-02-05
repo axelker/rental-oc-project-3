@@ -9,6 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class RentalsDtoResponse {
-    List<RentalDtoResponse> rentals;
+public class RentalsResponse {
+    List<RentalResponse> rentals;
 }

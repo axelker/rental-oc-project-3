@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.rental.dto.request.AuthLoginDtoRequest;
-import com.openclassrooms.rental.dto.request.AuthRegisterDtoRequest;
-import com.openclassrooms.rental.dto.response.AuthDtoResponse;
-import com.openclassrooms.rental.dto.response.UserDtoResponse;
+import com.openclassrooms.rental.dto.request.AuthLoginRequest;
+import com.openclassrooms.rental.dto.request.AuthRegisterRequest;
+import com.openclassrooms.rental.dto.response.AuthResponse;
+import com.openclassrooms.rental.dto.response.UserResponse;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -24,8 +24,8 @@ public class AuthRestController {
     
 
     @GetMapping("me")
-    public ResponseEntity<UserDtoResponse> getMe() {
-        final var user =  new UserDtoResponse(1L, "Owner Name", "test@test.com",
+    public ResponseEntity<UserResponse> getMe() {
+        final var user =  new UserResponse(1L, "Owner Name", "test@test.com",
                 LocalDate.of(2022, 2, 2),
                 LocalDate.of(2022, 8, 2));
 
@@ -33,14 +33,14 @@ public class AuthRestController {
     }
     
     @PostMapping("login")
-    public ResponseEntity<AuthDtoResponse> login(@RequestBody AuthLoginDtoRequest body) {
-        final var auth =  new AuthDtoResponse("jwt");
+    public ResponseEntity<AuthResponse> login(@RequestBody AuthLoginRequest body) {
+        final var auth =  new AuthResponse("jwt");
         return ResponseEntity.ok(auth);
     }
 
     @PostMapping("register")
-    public ResponseEntity<AuthDtoResponse> register(@RequestBody AuthRegisterDtoRequest body) {
-        final var auth =  new AuthDtoResponse("jwt");
+    public ResponseEntity<AuthResponse> register(@RequestBody AuthRegisterRequest body) {
+        final var auth =  new AuthResponse("jwt");
         return ResponseEntity.ok(auth);
     }
     

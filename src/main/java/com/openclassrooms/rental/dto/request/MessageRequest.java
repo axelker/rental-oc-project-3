@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MessageDtoRequest {
+public class MessageRequest {
     private String message;
     private Long user_id;
     private Long rental_id;

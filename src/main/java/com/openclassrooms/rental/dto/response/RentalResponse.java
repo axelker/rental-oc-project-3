@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class RentalDtoResponse {
+public class RentalResponse {
     private Long id;
     private String name;
     private int surface;
