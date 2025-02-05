@@ -1,10 +1,10 @@
-package com.openclassrooms.rental.dto;
+package com.openclassrooms.rental.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class AuthDto {
+public class AuthDtoResponse {
     private String token;
 }

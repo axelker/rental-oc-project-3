@@ -1,4 +1,4 @@
-package com.openclassrooms.rental.dto;
+package com.openclassrooms.rental.dto.response;
 
 import java.time.LocalDate;
 
@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UserDto {
+public class UserDtoResponse {
     private Long id;
 	private String name;
 	private String email;
