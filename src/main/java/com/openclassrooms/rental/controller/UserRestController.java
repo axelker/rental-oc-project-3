@@ -7,6 +7,7 @@ import com.openclassrooms.rental.dto.UserDto;
 
 import java.time.LocalDate;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -18,10 +19,12 @@ public class UserRestController {
     
 
     @GetMapping("{id}")
-    public UserDto getMethodName(@PathVariable Long id) {
-        return new UserDto(2L, "Owner Name", "test@test.com",
+    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
+        final var user =  new UserDto(2L, "Owner Name", "test@test.com",
                 LocalDate.of(2022, 2, 2),
-                LocalDate.of(2022, 8, 2));   
+                LocalDate.of(2022, 8, 2));
+
+        return ResponseEntity.ok(user);
     }
     
 }
