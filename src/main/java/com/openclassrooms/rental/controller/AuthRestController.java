@@ -25,7 +25,7 @@ public class AuthRestController {
 
     @GetMapping("me")
     public ResponseEntity<UserDtoResponse> getMe() {
-        final var user =  new UserDtoResponse(2L, "Owner Name", "test@test.com",
+        final var user =  new UserDtoResponse(1L, "Owner Name", "test@test.com",
                 LocalDate.of(2022, 2, 2),
                 LocalDate.of(2022, 8, 2));
 

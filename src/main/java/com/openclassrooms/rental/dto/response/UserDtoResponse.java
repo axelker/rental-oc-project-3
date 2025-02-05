@@ -3,9 +3,11 @@ package com.openclassrooms.rental.dto.response;
 import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class UserDtoResponse {
     private Long id;
