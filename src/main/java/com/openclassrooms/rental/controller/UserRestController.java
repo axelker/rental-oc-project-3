@@ -3,7 +3,7 @@ package com.openclassrooms.rental.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.rental.dto.UserDto;
+import com.openclassrooms.rental.dto.response.UserDtoResponse;
 
 import java.time.LocalDate;
 
@@ -19,8 +19,8 @@ public class UserRestController {
     
 
     @GetMapping("{id}")
-    public ResponseEntity<UserDto> getUser(@PathVariable Long id) {
-        final var user =  new UserDto(2L, "Owner Name", "test@test.com",
+    public ResponseEntity<UserDtoResponse> getUser(@PathVariable Long id) {
+        final var user =  new UserDtoResponse(2L, "Owner Name", "test@test.com",
                 LocalDate.of(2022, 2, 2),
                 LocalDate.of(2022, 8, 2));
 
