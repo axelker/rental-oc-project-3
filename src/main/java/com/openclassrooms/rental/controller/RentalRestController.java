@@ -8,9 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.openclassrooms.rental.dto.response.RentalResponse;
 import com.openclassrooms.rental.dto.response.RentalsResponse;
 import com.openclassrooms.rental.dto.response.Response;
+import com.openclassrooms.rental.service.query.RentalQueryService;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,32 +25,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RequestMapping("/rentals")
 public class RentalRestController {
     
+    private final RentalQueryService rentalQueryService;
+
+    public RentalRestController(RentalQueryService rentalQueryService){
+        this.rentalQueryService = rentalQueryService;
+    }
+
     @GetMapping("")
     public ResponseEntity<RentalsResponse> getRentals() {
-       return ResponseEntity.ok(new RentalsResponse(List.of(
-            new RentalResponse(1, "test house 1", 432, 300, 
-                "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                1, LocalDateTime.of(2012, 12, 2, 0, 0), LocalDateTime.of(2014, 12, 2, 0, 0)),
-
-            new RentalResponse(2, "test house 2", 154, 200, 
-                "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                2, LocalDateTime.of(2012, 12, 2, 0, 0), LocalDateTime.of(2014, 12, 2, 0, 0)),
-
-            new RentalResponse(3, "test house 3", 234, 100, 
-                "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                1, LocalDateTime.of(2012, 12, 2, 0, 0), LocalDateTime.of(2014, 12, 2, 0, 0))
-        )));
+       return ResponseEntity.ok(rentalQueryService.getRentals());
     }
 
     @GetMapping("{id}")
     public ResponseEntity<RentalResponse> getRental(@PathVariable Integer id) {
-        return ResponseEntity.ok(new RentalResponse(1, "test house 1", 432, 300, 
-                "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg",
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                1, LocalDateTime.of(2012, 12, 2, 0, 0), LocalDateTime.of(2014, 12, 2, 0, 0)));
+        return ResponseEntity.ok(rentalQueryService.getRentalById(id));
     }
 
     @PostMapping("")
