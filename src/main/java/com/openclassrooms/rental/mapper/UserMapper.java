@@ -10,12 +10,13 @@ public class UserMapper {
             return null;
         }
 
-        UserResponse response = new UserResponse();
-        response.setId(entity.getId());
-        response.setName(entity.getName());
-        response.setEmail(entity.getEmail());
-        response.setCreated_at(entity.getCreated_at());
-        response.setUpdated_at(entity.getUpdated_at());
+        UserResponse response = UserResponse.builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .email(entity.getEmail())
+                .created_at(entity.getCreated_at())
+                .updated_at(entity.getUpdated_at())
+                .build();
 
         return response;
     }

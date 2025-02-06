@@ -21,13 +21,14 @@ public class UserMapperTest {
 
     @Test
     void shouldMapUserEntityToUserResponse() {
-        UserEntity userEntity = new UserEntity();
-        userEntity.setId(1);
-        userEntity.setEmail("test@test.fr");
-        userEntity.setName("test");
-        userEntity.setCreated_at(LocalDateTime.now());
-        userEntity.setUpdated_at(LocalDateTime.now());
-        userEntity.setPassword("test-sectret");
+        UserEntity userEntity = UserEntity.builder()
+                .id(1)
+                .email("test@test.fr")
+                .name("test")
+                .created_at(LocalDateTime.now())
+                .updated_at(LocalDateTime.now())
+                .password("test-secret")
+                .build();
 
         UserResponse userResponse = UserMapper.toDto(userEntity);
 

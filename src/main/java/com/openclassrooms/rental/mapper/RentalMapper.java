@@ -10,17 +10,18 @@ public class RentalMapper {
             return null;
         }
 
-        RentalResponse response = new RentalResponse();
-        response.setId(entity.getId());
-        response.setName(entity.getName());
-        response.setSurface(entity.getSurface());
-        response.setPrice(entity.getPrice());
-        response.setPicture(entity.getPicture());
-        response.setDescription(entity.getDescription());
-        response.setOwner_id(entity.getOwner_id());
-        response.setCreated_at(entity.getCreated_at());
-        response.setUpdated_at(entity.getUpdated_at());
-
+        RentalResponse response = RentalResponse
+                .builder()
+                .id(entity.getId())
+                .name(entity.getName())
+                .surface(entity.getSurface())
+                .price(entity.getPrice())
+                .picture(entity.getPicture())
+                .description(entity.getDescription())
+                .owner_id(entity.getOwner_id())
+                .created_at(entity.getCreated_at())
+                .updated_at(entity.getUpdated_at())
+                .build();
         return response;
     }
 }
