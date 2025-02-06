@@ -23,10 +23,10 @@ public class RentalEntity {
     private String name;
 
     @Column(nullable = false)
-    private Float surface;
+    private double surface;
 
     @Column(nullable = false)
-    private Float price;
+    private double price;
 
     @Column(nullable = false)
     private String picture;
