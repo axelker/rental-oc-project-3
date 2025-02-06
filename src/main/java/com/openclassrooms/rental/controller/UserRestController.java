@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.openclassrooms.rental.dto.response.UserResponse;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,10 +19,10 @@ public class UserRestController {
     
 
     @GetMapping("{id}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
-        final var user =  new UserResponse(1L, "Owner Name", "test@test.com",
-                LocalDate.of(2022, 2, 2),
-                LocalDate.of(2022, 8, 2));
+    public ResponseEntity<UserResponse> getUser(@PathVariable Integer id) {
+        final var user =  new UserResponse(1, "Owner Name", "test@test.com",
+                LocalDateTime.of(2022, 2, 2, 0, 0),
+                LocalDateTime.of(2022, 8, 2, 0, 0));
 
         return ResponseEntity.ok(user);
     }

@@ -9,7 +9,7 @@ import com.openclassrooms.rental.dto.response.RentalResponse;
 import com.openclassrooms.rental.dto.response.RentalsResponse;
 import com.openclassrooms.rental.dto.response.Response;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -29,47 +29,47 @@ public class RentalRestController {
     @GetMapping("")
     public ResponseEntity<RentalsResponse> getRentals() {
        return ResponseEntity.ok(new RentalsResponse(List.of(
-            new RentalResponse(1L, "test house 1", 432, 300, 
+            new RentalResponse(1, "test house 1", 432, 300, 
                 "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                1L, LocalDate.of(2012, 12, 2), LocalDate.of(2014, 12, 2)),
+                1, LocalDateTime.of(2012, 12, 2, 0, 0), LocalDateTime.of(2014, 12, 2, 0, 0)),
 
-            new RentalResponse(2L, "test house 2", 154, 200, 
+            new RentalResponse(2, "test house 2", 154, 200, 
                 "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                2L, LocalDate.of(2012, 12, 2), LocalDate.of(2014, 12, 2)),
+                2, LocalDateTime.of(2012, 12, 2, 0, 0), LocalDateTime.of(2014, 12, 2, 0, 0)),
 
-            new RentalResponse(3L, "test house 3", 234, 100, 
+            new RentalResponse(3, "test house 3", 234, 100, 
                 "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                1L, LocalDate.of(2012, 12, 2), LocalDate.of(2014, 12, 2))
+                1, LocalDateTime.of(2012, 12, 2, 0, 0), LocalDateTime.of(2014, 12, 2, 0, 0))
         )));
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<RentalResponse> getRental(@PathVariable Long id) {
-        return ResponseEntity.ok(new RentalResponse(1L, "test house 1", 432, 300, 
+    public ResponseEntity<RentalResponse> getRental(@PathVariable Integer id) {
+        return ResponseEntity.ok(new RentalResponse(1, "test house 1", 432, 300, 
                 "https://blog.technavio.org/wp-content/uploads/2018/12/Online-House-Rental-Sites.jpg",
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
-                1L, LocalDate.of(2012, 12, 2), LocalDate.of(2014, 12, 2)));
+                1, LocalDateTime.of(2012, 12, 2, 0, 0), LocalDateTime.of(2014, 12, 2, 0, 0)));
     }
 
     @PostMapping("")
     public ResponseEntity<Response> createRental(
             @RequestParam String name,
-            @RequestParam Integer surface,
-            @RequestParam Integer price,
-            @RequestParam  String description,
+            @RequestParam double surface,
+            @RequestParam double price,
+            @RequestParam String description,
             @RequestParam MultipartFile picture) {  
        return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Rental created ! "));
     }
 
     @PutMapping("{id}")
     public ResponseEntity<Response> updateRental(
-            @PathVariable String id,
+            @PathVariable Integer id,
             @RequestParam String name,
-            @RequestParam Integer surface,
-            @RequestParam Integer price,
+            @RequestParam double surface,
+            @RequestParam double price,
             @RequestParam String description) {        
         return ResponseEntity.ok().body(new Response("Rental updated !"));
     }

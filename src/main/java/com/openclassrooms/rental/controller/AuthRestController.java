@@ -11,7 +11,7 @@ import com.openclassrooms.rental.dto.response.UserResponse;
 
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,9 +25,9 @@ public class AuthRestController {
 
     @GetMapping("me")
     public ResponseEntity<UserResponse> getMe() {
-        final var user =  new UserResponse(1L, "Owner Name", "test@test.com",
-                LocalDate.of(2022, 2, 2),
-                LocalDate.of(2022, 8, 2));
+        final var user =  new UserResponse(1, "Owner Name", "test@test.com",
+                LocalDateTime.of(2022, 2, 2, 0, 0),
+                LocalDateTime.of(2022, 8, 2, 0, 0));
 
         return ResponseEntity.ok(user);
     }

@@ -1,22 +1,24 @@
 package com.openclassrooms.rental.dto.response;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class RentalResponse {
-    private Long id;
+    private Integer id;
     private String name;
-    private int surface;
-    private int price;
+    private double surface;
+    private double price;
     private String picture;
     private String description;
-    private Long owner_id;
-    private LocalDate created_at;
-    private LocalDate updated_at;
+    private Integer owner_id;
+    private LocalDateTime created_at;
+    private LocalDateTime updated_at;
 }
