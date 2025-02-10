@@ -1,13 +1,9 @@
 package com.openclassrooms.rental.service.query;
 
+import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
-
 import org.springframework.stereotype.Service;
 
-import com.openclassrooms.rental.dto.response.RentalResponse;
-import com.openclassrooms.rental.dto.response.RentalsResponse;
-import com.openclassrooms.rental.mapper.RentalMapper;
 import com.openclassrooms.rental.model.RentalEntity;
 import com.openclassrooms.rental.repository.RentalRepository;
 
@@ -19,17 +15,13 @@ public class RentalQueryService {
         this.rentalRepository = rentalRepository;
     }
 
-    public RentalResponse getRentalById(Integer id) throws NoSuchElementException {
-        RentalEntity rental = rentalRepository.findById(id)
+    public RentalEntity getRentalById(Integer id) throws NoSuchElementException {
+        return rentalRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Rental not found"));
-        return RentalMapper.toDto(rental);
     }
 
-    public RentalsResponse getRentals() {
-        return RentalsResponse.builder().rentals(rentalRepository.findAll()
-                .stream()
-                .map(RentalMapper::toDto)
-                .collect(Collectors.toList())).build();
+    public List<RentalEntity> getRentals() {
+        return rentalRepository.findAll();
     }
 
 }

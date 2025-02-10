@@ -8,10 +8,12 @@ import org.springframework.web.multipart.MultipartFile;
 import com.openclassrooms.rental.dto.response.RentalResponse;
 import com.openclassrooms.rental.dto.response.RentalsResponse;
 import com.openclassrooms.rental.dto.response.Response;
+import com.openclassrooms.rental.mapper.RentalMapper;
 import com.openclassrooms.rental.service.command.RentalCommandService;
 import com.openclassrooms.rental.service.query.RentalQueryService;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,20 +28,27 @@ public class RentalRestController {
 
     private final RentalQueryService rentalQueryService;
     private final RentalCommandService rentalCommandService;
+    private final RentalMapper rentalMapper;
 
-    public RentalRestController(RentalQueryService rentalQueryService, RentalCommandService rentalCommandService) {
+    public RentalRestController(RentalQueryService rentalQueryService, RentalCommandService rentalCommandService,
+            RentalMapper rentalMapper) {
         this.rentalQueryService = rentalQueryService;
         this.rentalCommandService = rentalCommandService;
+        this.rentalMapper = rentalMapper;
     }
 
     @GetMapping("")
     public ResponseEntity<RentalsResponse> getRentals() {
-        return ResponseEntity.ok(rentalQueryService.getRentals());
+        RentalsResponse rentals = RentalsResponse.builder().rentals(rentalQueryService.getRentals()
+                .stream()
+                .map(rentalMapper::toDto)
+                .collect(Collectors.toList())).build();
+        return ResponseEntity.ok(rentals);
     }
 
     @GetMapping("{id}")
     public ResponseEntity<RentalResponse> getRental(@PathVariable Integer id) {
-        return ResponseEntity.ok(rentalQueryService.getRentalById(id));
+        return ResponseEntity.ok(rentalMapper.toDto(rentalQueryService.getRentalById(id)));
     }
 
     @PostMapping("")

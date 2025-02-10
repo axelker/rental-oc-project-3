@@ -33,7 +33,7 @@ public class RentalQueryServiceTest {
 
         when(rentalRepository.findById(1)).thenReturn(Optional.of(rentalEntity));
 
-        RentalResponse response = rentalQueryService.getRentalById(1);
+        RentalEntity response = rentalQueryService.getRentalById(1);
 
         assertNotNull(response);
         assertEquals(rentalEntity.getId(), response.getId());
@@ -59,11 +59,10 @@ public class RentalQueryServiceTest {
         List<RentalEntity> rentalEntities = List.of(rentalEntity1, rentalEntity2);
         when(rentalRepository.findAll()).thenReturn(rentalEntities);
 
-        RentalsResponse rentalsResponse = rentalQueryService.getRentals();
+        List<RentalEntity> rentals = rentalQueryService.getRentals();
 
-        assertNotNull(rentalsResponse);
-        assertNotNull(rentalsResponse.getRentals());
-        assertEquals(2, rentalsResponse.getRentals().size());
+        assertNotNull(rentals);
+        assertEquals(2, rentals.size());
     }
 
     private RentalEntity buildRentalEntity() {
