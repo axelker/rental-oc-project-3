@@ -19,18 +19,17 @@ public class RentalQueryService {
         this.rentalRepository = rentalRepository;
     }
 
-    public RentalResponse getRentalById(Integer id) {
+    public RentalResponse getRentalById(Integer id) throws NoSuchElementException {
         RentalEntity rental = rentalRepository.findById(id)
-            .orElseThrow(() -> new NoSuchElementException ("Rental not found"));
+                .orElseThrow(() -> new NoSuchElementException("Rental not found"));
         return RentalMapper.toDto(rental);
     }
 
     public RentalsResponse getRentals() {
         return new RentalsResponse(rentalRepository.findAll()
-        .stream()
-        .map(RentalMapper::toDto)
-        .collect(Collectors.toList()));
+                .stream()
+                .map(RentalMapper::toDto)
+                .collect(Collectors.toList()));
     }
-
 
 }
