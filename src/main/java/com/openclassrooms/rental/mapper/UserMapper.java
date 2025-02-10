@@ -1,5 +1,8 @@
 package com.openclassrooms.rental.mapper;
 
+import java.time.LocalDateTime;
+
+import com.openclassrooms.rental.dto.request.AuthRegisterRequest;
 import com.openclassrooms.rental.dto.response.UserResponse;
 import com.openclassrooms.rental.model.UserEntity;
 
@@ -19,5 +22,21 @@ public class UserMapper {
                 .build();
 
         return response;
+    }
+
+    public static UserEntity authRegistertoEntity(AuthRegisterRequest request) {
+        if (request == null) {
+            return null;
+        }
+
+        UserEntity entity = UserEntity.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .created_at(LocalDateTime.now())
+                .updated_at(LocalDateTime.now())
+                .build();
+
+        return entity;
     }
 }
