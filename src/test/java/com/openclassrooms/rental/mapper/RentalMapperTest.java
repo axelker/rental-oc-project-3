@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 
 public class RentalMapperTest {
 
-    
     @Test
     void shouldMapRentalEntityNullToNull() {
         RentalEntity rentalEntity = null;
@@ -22,16 +21,18 @@ public class RentalMapperTest {
 
     @Test
     void shouldMapRentalEntityToRentalResponse() {
-        RentalEntity rentalEntity = new RentalEntity();
-        rentalEntity.setId(1);
-        rentalEntity.setName("Luxury Appart");
-        rentalEntity.setSurface(85.00);
-        rentalEntity.setPrice(1500.00);
-        rentalEntity.setPicture("test.jpg");
-        rentalEntity.setDescription("Test description");
-        rentalEntity.setOwner_id(10);
-        rentalEntity.setCreated_at(LocalDateTime.now());
-        rentalEntity.setUpdated_at(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        RentalEntity rentalEntity = RentalEntity.builder()
+                .id(1)
+                .name("Rental 1")
+                .surface(100.0)
+                .price(1500.0)
+                .picture("http://example.com/pic1.jpg")
+                .description("Description 1")
+                .created_at(now)
+                .updated_at(now)
+                .owner_id(42)
+                .build();
 
         RentalResponse rentalResponse = RentalMapper.toDto(rentalEntity);
 

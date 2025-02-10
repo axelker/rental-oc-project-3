@@ -16,33 +16,33 @@ import java.time.LocalDateTime;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
-
 @RestController
 @RequestMapping("/auth")
 public class AuthRestController {
-    
 
     @GetMapping("me")
     public ResponseEntity<UserResponse> getMe() {
-        final var user =  new UserResponse(1, "Owner Name", "test@test.com",
-                LocalDateTime.of(2022, 2, 2, 0, 0),
-                LocalDateTime.of(2022, 8, 2, 0, 0));
+        final var user = UserResponse.builder()
+                .id(1)
+                .name("Owner Name")
+                .email("test@test.com")
+                .created_at(LocalDateTime.of(2022, 2, 2, 0, 0))
+                .updated_at(LocalDateTime.of(2022, 8, 2, 0, 0))
+                .build();
 
         return ResponseEntity.ok(user);
     }
-    
+
     @PostMapping("login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthLoginRequest body) {
-        final var auth =  new AuthResponse("jwt");
+        final var auth = new AuthResponse("jwt");
         return ResponseEntity.ok(auth);
     }
 
     @PostMapping("register")
     public ResponseEntity<AuthResponse> register(@RequestBody AuthRegisterRequest body) {
-        final var auth =  new AuthResponse("jwt");
+        final var auth = new AuthResponse("jwt");
         return ResponseEntity.ok(auth);
     }
-    
-    
+
 }
