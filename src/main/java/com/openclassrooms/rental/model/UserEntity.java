@@ -27,7 +27,7 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String password;
-    
+
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime created_at;
