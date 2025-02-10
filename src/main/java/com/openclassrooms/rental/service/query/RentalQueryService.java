@@ -14,22 +14,24 @@ import com.openclassrooms.rental.repository.RentalRepository;
 @Service
 public class RentalQueryService {
     private final RentalRepository rentalRepository;
+    private final RentalMapper rentalMapper;
 
-    public RentalQueryService(RentalRepository rentalRepository) {
+    public RentalQueryService(RentalRepository rentalRepository, RentalMapper rentalMapper) {
         this.rentalRepository = rentalRepository;
+        this.rentalMapper = rentalMapper;
     }
 
     public RentalResponse getRentalById(Integer id) throws NoSuchElementException {
         RentalEntity rental = rentalRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Rental not found"));
-        return RentalMapper.toDto(rental);
+        return rentalMapper.toDto(rental);
     }
 
     public RentalsResponse getRentals() {
-        return new RentalsResponse(rentalRepository.findAll()
+        return RentalsResponse.builder().rentals(rentalRepository.findAll()
                 .stream()
-                .map(RentalMapper::toDto)
-                .collect(Collectors.toList()));
+                .map(rentalMapper::toDto)
+                .collect(Collectors.toList())).build();
     }
 
 }

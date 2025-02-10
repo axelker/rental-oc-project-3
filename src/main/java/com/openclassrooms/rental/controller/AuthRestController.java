@@ -35,13 +35,13 @@ public class AuthRestController {
 
     @PostMapping("login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthLoginRequest body) {
-        final var auth = new AuthResponse("jwt");
+        final var auth = AuthResponse.builder().token("jwt").build();
         return ResponseEntity.ok(auth);
     }
 
     @PostMapping("register")
     public ResponseEntity<AuthResponse> register(@RequestBody AuthRegisterRequest body) {
-        final var auth = new AuthResponse("jwt");
+        final var auth = AuthResponse.builder().token("jwt").build();
         return ResponseEntity.ok(auth);
     }
 

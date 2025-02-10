@@ -54,9 +54,10 @@ public class RentalRestController {
             // user_id of JWT.
             rentalCommandService.createRental(name, surface, price, description, picture);
         } catch (IOException e) {
-            return ResponseEntity.internalServerError().body(new Response("Error to save rental image."));
+            return ResponseEntity.internalServerError()
+                    .body(Response.builder().message("Error to save rental image.").build());
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(new Response("Rental created ! "));
+        return ResponseEntity.status(HttpStatus.CREATED).body(Response.builder().message("Rental created ! ").build());
     }
 
     @PutMapping("{id}")
@@ -69,7 +70,7 @@ public class RentalRestController {
         // todo: build custom object RequestRental with optional picture and include
         // user_id of JWT.
         rentalCommandService.updateRental(id, name, surface, price, description);
-        return ResponseEntity.ok().body(new Response("Rental updated !"));
+        return ResponseEntity.ok().body(Response.builder().message("Rental updated !").build());
     }
 
 }

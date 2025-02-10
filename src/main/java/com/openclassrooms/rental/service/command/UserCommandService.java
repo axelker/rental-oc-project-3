@@ -9,14 +9,16 @@ import com.openclassrooms.rental.repository.UserRepository;
 @Service
 public class UserCommandService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserCommandService(UserRepository userRepository) {
+    public UserCommandService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     public void createUser(AuthRegisterRequest request) {
         // todo : manage users and password in spring security.
-        var user = UserMapper.authRegistertoEntity(request);
-        userRepository.save(UserMapper.authRegistertoEntity(request));
+        var user = userMapper.authRegisterToEntity(request);
+        userRepository.save(userMapper.authRegisterToEntity(request));
     }
 }

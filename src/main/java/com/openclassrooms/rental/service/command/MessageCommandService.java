@@ -8,15 +8,16 @@ import com.openclassrooms.rental.repository.MessageRepository;
 
 @Service
 public class MessageCommandService {
-    
+
     private final MessageRepository messageRepository;
+    private final MessageMapper messageMapper;
 
-
-    public MessageCommandService(MessageRepository messageRepository){
+    public MessageCommandService(MessageRepository messageRepository, MessageMapper messageMapper) {
         this.messageRepository = messageRepository;
+        this.messageMapper = messageMapper;
     }
 
     public void createMessage(MessageRequest message) {
-        messageRepository.save(MessageMapper.toEntity(message));
+        messageRepository.save(messageMapper.toEntity(message));
     }
 }

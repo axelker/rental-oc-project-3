@@ -11,10 +11,12 @@ import org.junit.jupiter.api.Test;
 
 public class RentalMapperTest {
 
+    private final RentalMapper rentalMapper = RentalMapper.INSTANCE;
+
     @Test
     void shouldMapRentalEntityNullToNull() {
         RentalEntity rentalEntity = null;
-        RentalResponse rentalResponse = RentalMapper.toDto(rentalEntity);
+        RentalResponse rentalResponse = rentalMapper.toDto(rentalEntity);
 
         assertThat(rentalResponse).isNull();
     }
@@ -34,7 +36,7 @@ public class RentalMapperTest {
                 .owner_id(42)
                 .build();
 
-        RentalResponse rentalResponse = RentalMapper.toDto(rentalEntity);
+        RentalResponse rentalResponse = rentalMapper.toDto(rentalEntity);
 
         assertThat(rentalResponse).isNotNull();
         assertThat(rentalResponse.getId()).isEqualTo(rentalEntity.getId());

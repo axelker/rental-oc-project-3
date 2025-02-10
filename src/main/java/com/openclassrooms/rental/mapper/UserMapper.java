@@ -1,42 +1,22 @@
 package com.openclassrooms.rental.mapper;
 
-import java.time.LocalDateTime;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.factory.Mappers;
 
 import com.openclassrooms.rental.dto.request.AuthRegisterRequest;
 import com.openclassrooms.rental.dto.response.UserResponse;
 import com.openclassrooms.rental.model.UserEntity;
 
-public class UserMapper {
+@Mapper
+public interface UserMapper {
 
-    public static UserResponse toDto(UserEntity entity) {
-        if (entity == null) {
-            return null;
-        }
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-        UserResponse response = UserResponse.builder()
-                .id(entity.getId())
-                .name(entity.getName())
-                .email(entity.getEmail())
-                .created_at(entity.getCreated_at())
-                .updated_at(entity.getUpdated_at())
-                .build();
+    UserResponse toDto(UserEntity entity);
 
-        return response;
-    }
-
-    public static UserEntity authRegistertoEntity(AuthRegisterRequest request) {
-        if (request == null) {
-            return null;
-        }
-
-        UserEntity entity = UserEntity.builder()
-                .name(request.getName())
-                .email(request.getEmail())
-                .password(request.getPassword())
-                .created_at(LocalDateTime.now())
-                .updated_at(LocalDateTime.now())
-                .build();
-
-        return entity;
-    }
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "created_at", ignore = true)
+    @Mapping(target = "updated_at", ignore = true)
+    UserEntity authRegisterToEntity(AuthRegisterRequest request);
 }

@@ -9,16 +9,21 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 import com.openclassrooms.rental.model.UserEntity;
+import com.openclassrooms.rental.dto.response.UserResponse;
 import com.openclassrooms.rental.repository.UserRepository;
 
 import java.util.NoSuchElementException;
+import com.openclassrooms.rental.mapper.UserMapper;
 
 @ExtendWith(MockitoExtension.class)
 public class UserQueryServiceTest {
 
+    @Mock
+    private UserMapper userMapper;
     @Mock
     private UserRepository userRepository;
 
@@ -36,15 +41,19 @@ public class UserQueryServiceTest {
                 .password("test-secret")
                 .build();
 
-        when(userRepository.findById(1)).thenReturn(Optional.of(userEntity));
-
+        UserResponse userResponse = UserResponse.builder().id(1).email("test@test.fr").name("test").build();
+        when(userRepository.findById(1))
+                .thenReturn(Optional.of(userEntity));
+        when(userMapper.toDto(userEntity)).thenReturn(userResponse);
         var result = userQueryService.getUserById(1);
 
         // Vérifications
         assertNotNull(result);
-        assertEquals(1, result.getId());
-        assertEquals("test@test.fr", result.getEmail());
-        assertEquals("test", result.getName());
+        assertEquals(userResponse.getId(), result.getId());
+        assertEquals(userResponse.getEmail(), result.getEmail());
+        assertEquals(userResponse.getName(), result.getName());
+        verify(userMapper, times(1)).toDto(userEntity);
+
     }
 
     @Test
@@ -56,5 +65,7 @@ public class UserQueryServiceTest {
         });
 
         assertEquals("User not found", exception.getMessage());
+        verify(userMapper, never()).toDto(any());
+
     }
 }

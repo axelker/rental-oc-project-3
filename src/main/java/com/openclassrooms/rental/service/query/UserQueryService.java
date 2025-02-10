@@ -12,15 +12,17 @@ import com.openclassrooms.rental.repository.UserRepository;
 @Service
 public class UserQueryService {
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public UserQueryService(UserRepository userRepository) {
+    public UserQueryService(UserRepository userRepository, UserMapper userMapper) {
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     public UserResponse getUserById(Integer id) throws NoSuchElementException {
         UserEntity user = userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("User not found"));
-        return UserMapper.toDto(user);
+        return userMapper.toDto(user);
     }
 
 }
