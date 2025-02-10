@@ -17,11 +17,10 @@ public class UserQueryService {
         this.userRepository = userRepository;
     }
 
-    public UserResponse getUserById(Integer id) {
+    public UserResponse getUserById(Integer id) throws NoSuchElementException {
         UserEntity user = userRepository.findById(id)
-            .orElseThrow(() -> new NoSuchElementException ("User not found"));
+                .orElseThrow(() -> new NoSuchElementException("User not found"));
         return UserMapper.toDto(user);
     }
-
 
 }
