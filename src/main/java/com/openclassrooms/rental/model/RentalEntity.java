@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Entity
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @Table(name = "rentals")
 public class RentalEntity {
 
