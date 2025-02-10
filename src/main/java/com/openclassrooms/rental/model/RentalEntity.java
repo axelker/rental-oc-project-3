@@ -1,19 +1,14 @@
 package com.openclassrooms.rental.model;
 
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
-@Builder(toBuilder = true)
+@SuperBuilder(toBuilder = true)
 @Table(name = "rentals")
-public class RentalEntity {
+public class RentalEntity extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,14 +28,6 @@ public class RentalEntity {
 
     @Column(nullable = false)
     private String description;
-
-    @CreationTimestamp
-    @Column(nullable = false)
-    private LocalDateTime created_at;
-
-    @UpdateTimestamp
-    @Column(nullable = false)
-    private LocalDateTime updated_at;
 
     @Column(nullable = false)
     private Integer owner_id;

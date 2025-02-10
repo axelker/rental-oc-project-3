@@ -1,19 +1,15 @@
 package com.openclassrooms.rental.model;
 
-import java.time.LocalDateTime;
-
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
-import lombok.Builder;
 import lombok.Getter;
+import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
-@Builder
+@SuperBuilder
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +23,5 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String password;
-
-    @CreationTimestamp
-    @Column(nullable = false)
-    private LocalDateTime created_at;
-
-    @UpdateTimestamp
-    @Column(nullable = false)
-    private LocalDateTime updated_at;
 
 }
