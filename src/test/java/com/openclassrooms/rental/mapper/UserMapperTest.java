@@ -14,6 +14,14 @@ public class UserMapperTest {
     private final UserMapper userMapper = UserMapper.INSTANCE;
 
     @Test
+    void shouldMapUserEntityNullToNull() {
+        UserEntity userEntity = null;
+        UserResponse userResponse = userMapper.toDto(userEntity);
+
+        assertThat(userResponse).isNull();
+    }
+
+    @Test
     void shouldMapUserEntityToUserResponse() {
         UserEntity userEntity = UserEntity.builder()
                 .id(1)
