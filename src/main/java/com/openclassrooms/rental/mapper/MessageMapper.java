@@ -16,7 +16,8 @@ public interface MessageMapper {
     MessageMapper INSTANCE = Mappers.getMapper(MessageMapper.class);
 
     @Mapping(target = "id", ignore = true)
-
+    @Mapping(target = "created_at", ignore = true)
+    @Mapping(target = "updated_at", ignore = true)
     @Mapping(target = "user", source = "user_id", qualifiedByName = "mapUserById")
     @Mapping(target = "rental", source = "rental_id", qualifiedByName = "mapRentalById")
     MessageEntity toEntity(MessageRequest message);
