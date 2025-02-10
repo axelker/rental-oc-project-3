@@ -1,10 +1,10 @@
 package com.openclassrooms.rental.dto.request;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
+@Builder
 public class MessageRequest {
     private String message;
     private Integer user_id;

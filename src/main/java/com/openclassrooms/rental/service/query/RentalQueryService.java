@@ -26,10 +26,10 @@ public class RentalQueryService {
     }
 
     public RentalsResponse getRentals() {
-        return new RentalsResponse(rentalRepository.findAll()
+        return RentalsResponse.builder().rentals(rentalRepository.findAll()
                 .stream()
                 .map(RentalMapper::toDto)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())).build();
     }
 
 }

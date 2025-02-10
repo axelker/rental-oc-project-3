@@ -4,8 +4,6 @@ import java.util.NoSuchElementException;
 
 import org.springframework.stereotype.Service;
 
-import com.openclassrooms.rental.dto.response.UserResponse;
-import com.openclassrooms.rental.mapper.UserMapper;
 import com.openclassrooms.rental.model.UserEntity;
 import com.openclassrooms.rental.repository.UserRepository;
 
@@ -17,10 +15,9 @@ public class UserQueryService {
         this.userRepository = userRepository;
     }
 
-    public UserResponse getUserById(Integer id) throws NoSuchElementException {
-        UserEntity user = userRepository.findById(id)
+    public UserEntity getUserById(Integer id) throws NoSuchElementException {
+        return userRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("User not found"));
-        return UserMapper.toDto(user);
     }
 
 }
