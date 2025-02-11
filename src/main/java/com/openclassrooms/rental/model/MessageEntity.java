@@ -1,14 +1,14 @@
 package com.openclassrooms.rental.model;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
-
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
 @SuperBuilder
+@NoArgsConstructor
 @Table(name = "messages")
 public class MessageEntity extends Auditable {
 

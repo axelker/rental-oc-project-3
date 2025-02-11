@@ -2,11 +2,13 @@ package com.openclassrooms.rental.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
 @SuperBuilder(toBuilder = true)
+@NoArgsConstructor
 @Table(name = "rentals")
 public class RentalEntity extends Auditable {
 
