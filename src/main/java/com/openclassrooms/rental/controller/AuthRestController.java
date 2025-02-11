@@ -8,7 +8,7 @@ import com.openclassrooms.rental.dto.request.AuthLoginRequest;
 import com.openclassrooms.rental.dto.request.AuthRegisterRequest;
 import com.openclassrooms.rental.dto.response.AuthResponse;
 import com.openclassrooms.rental.dto.response.UserResponse;
-
+import com.openclassrooms.rental.service.auth.AuthenticationService;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @RestController
 @RequestMapping("/auth")
 public class AuthRestController {
+    private final AuthenticationService authService;
+
+    AuthRestController(AuthenticationService authService) {
+        this.authService = authService;
+    }
 
     @GetMapping("me")
     public ResponseEntity<UserResponse> getMe() {
@@ -35,14 +40,12 @@ public class AuthRestController {
 
     @PostMapping("login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthLoginRequest body) {
-        final var auth = AuthResponse.builder().token("jwt").build();
-        return ResponseEntity.ok(auth);
+        return ResponseEntity.ok(authService.authenticate(body));
     }
 
     @PostMapping("register")
-    public ResponseEntity<AuthResponse> register(@RequestBody AuthRegisterRequest body) {
-        final var auth = AuthResponse.builder().token("jwt").build();
-        return ResponseEntity.ok(auth);
+    public ResponseEntity<AuthResponse> register(@RequestBody AuthRegisterRequest body) throws Exception {
+        return ResponseEntity.ok(authService.register(body));
     }
 
 }
