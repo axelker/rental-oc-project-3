@@ -3,6 +3,8 @@ package com.openclassrooms.rental.service.auth;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
@@ -30,10 +32,18 @@ public class JWTService {
                 .issuer("self")
                 .issuedAt(now)
                 .subject(user.getUsername())
+                .claim("user_id", user.getId())
                 .expiresAt(now.plus(jwtExpiration, ChronoUnit.MILLIS))
                 .build();
         JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters
                 .from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);
         return this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
     }
+
+    public Integer getUserId(Authentication authentication) {
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+        Long userIdLong = jwt.getClaim("user_id");
+        return userIdLong.intValue();
+    }
+
 }
