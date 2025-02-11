@@ -26,7 +26,7 @@ public class RentalEntity extends Auditable {
     @Column(nullable = false)
     private String picture;
 
-    @Column(nullable = false)
+    @Column(length = 2000, nullable = false)
     private String description;
 
     @Column(nullable = false)
