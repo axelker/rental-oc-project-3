@@ -8,7 +8,7 @@ import com.openclassrooms.rental.dto.request.AuthRegisterRequest;
 import com.openclassrooms.rental.dto.response.UserResponse;
 import com.openclassrooms.rental.model.UserEntity;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
 
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);

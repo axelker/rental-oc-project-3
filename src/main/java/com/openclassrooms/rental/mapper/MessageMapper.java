@@ -10,7 +10,7 @@ import com.openclassrooms.rental.model.MessageEntity;
 import com.openclassrooms.rental.model.RentalEntity;
 import com.openclassrooms.rental.model.UserEntity;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface MessageMapper {
 
     MessageMapper INSTANCE = Mappers.getMapper(MessageMapper.class);
