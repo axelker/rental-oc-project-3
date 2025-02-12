@@ -30,6 +30,9 @@ public class SecurityConfig {
     @Value("${security.publicUrls}")
     private String[] publicUrls;
 
+    @Value("${file.storage-publicUrls}")
+    private String[] storagePublicFileUrls;
+
     @Value("${jwt.secret}")
     private String jwtSecret;
 
@@ -46,6 +49,7 @@ public class SecurityConfig {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(publicUrls).permitAll()
+                        .requestMatchers(storagePublicFileUrls).permitAll()
                         .anyRequest().authenticated())
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .build();

@@ -30,8 +30,8 @@ public class RentalCommandService {
                         String description,
                         MultipartFile picture,
                         Integer userId) throws IOException {
-
-                String pictureUrl = imageStorageService.buildCompleteUrlFile(picture.getOriginalFilename());
+                String randomFileName = imageStorageService.buildRandomFileName(picture.getOriginalFilename());
+                String pictureUrl = imageStorageService.buildCompleteUrlFile(randomFileName);
                 rentalRepository.save(RentalEntity.builder()
                                 .name(name)
                                 .surface(surface)
@@ -40,7 +40,7 @@ public class RentalCommandService {
                                 .picture(pictureUrl)
                                 .owner_id(userId)
                                 .build());
-                imageStorageService.saveImage(picture, pictureUrl);
+                imageStorageService.saveImage(picture, randomFileName);
         }
 
         public void updateRental(Integer id,
