@@ -4,7 +4,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import net.coobird.thumbnailator.Thumbnails;
 
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,26 +21,42 @@ import java.util.UUID;
 public class ImageStorageService {
 
     private static final Logger log = LoggerFactory.getLogger(ImageStorageService.class);
-    @Value("${file.upload-dir}")
-    private String uploadDir;
+    @Value("${server.servlet.context-path:/}")
+    private String contextPath;
+    @Value("${file.upload-images-dir}")
+    private String uploadImgDir;
 
     private final List<String> allowedExtensions = List.of("jpg", "jpeg", "png", "gif");
 
-    public String saveImage(MultipartFile file, String fileUrl) throws IOException {
+    public String saveImage(MultipartFile file, String fileName) throws IOException {
         validateFile(file);
 
-        Path filePath = Path.of(fileUrl);
-        Path parentDir = filePath.getParent();
+        Path parentDir = getUploadDirPath();
         if (!Files.exists(parentDir)) {
             Files.createDirectories(parentDir);
             log.info("Create folder : {}", parentDir);
         }
-
+        Path filePath = parentDir.resolve(fileName);
         byte[] compressedImage = compressImage(file);
         Files.write(filePath, compressedImage);
 
         log.info("File save in : {}", filePath);
         return filePath.toString();
+    }
+
+    public byte[] loadImage(String fileName) throws IOException {
+        Path uploadPath = getUploadDirPath();
+        Path filePath = uploadPath.resolve(fileName).normalize();
+
+        if (Files.exists(filePath) && Files.isReadable(filePath)) {
+            return Files.readAllBytes(filePath);
+        } else {
+            throw new IOException("File not found: " + fileName);
+        }
+    }
+
+    private Path getUploadDirPath() {
+        return Paths.get("").toAbsolutePath().resolve(uploadImgDir).normalize();
     }
 
     private void validateFile(MultipartFile file) {
@@ -71,10 +87,10 @@ public class ImageStorageService {
     }
 
     public String buildCompleteUrlFile(String fileName) {
-        return Path.of(uploadDir, buildRandomFileName(fileName)).toString();
+        return new StringBuilder().append(contextPath).append("/storage/images").append("/" + fileName).toString();
     }
 
-    private String buildRandomFileName(String filename) {
+    public String buildRandomFileName(String filename) {
         return UUID.randomUUID().toString() + "_" + filename;
     }
 }

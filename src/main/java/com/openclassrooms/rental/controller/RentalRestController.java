@@ -8,13 +8,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.openclassrooms.rental.dto.response.RentalResponse;
 import com.openclassrooms.rental.dto.response.RentalsResponse;
 import com.openclassrooms.rental.dto.response.Response;
+import com.openclassrooms.rental.service.auth.JWTService;
 import com.openclassrooms.rental.service.command.RentalCommandService;
 import com.openclassrooms.rental.service.query.RentalQueryService;
-
 import java.io.IOException;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -26,10 +26,13 @@ public class RentalRestController {
 
     private final RentalQueryService rentalQueryService;
     private final RentalCommandService rentalCommandService;
+    private final JWTService jwtService;
 
-    public RentalRestController(RentalQueryService rentalQueryService, RentalCommandService rentalCommandService) {
+    public RentalRestController(RentalQueryService rentalQueryService, RentalCommandService rentalCommandService,
+            JWTService jwtService) {
         this.rentalQueryService = rentalQueryService;
         this.rentalCommandService = rentalCommandService;
+        this.jwtService = jwtService;
     }
 
     @GetMapping("")
@@ -48,11 +51,13 @@ public class RentalRestController {
             @RequestParam double surface,
             @RequestParam double price,
             @RequestParam String description,
-            @RequestParam MultipartFile picture) {
+            @RequestParam MultipartFile picture,
+            Authentication authentication) {
+
         try {
-            // todo: build custom object RequestRental with optional picture and include
-            // user_id of JWT.
-            rentalCommandService.createRental(name, surface, price, description, picture);
+
+            rentalCommandService.createRental(name, surface, price, description, picture,
+                    jwtService.getUserId(authentication));
         } catch (IOException e) {
             return ResponseEntity.internalServerError()
                     .body(Response.builder().message("Error to save rental image.").build());
@@ -67,8 +72,6 @@ public class RentalRestController {
             @RequestParam double surface,
             @RequestParam double price,
             @RequestParam String description) {
-        // todo: build custom object RequestRental with optional picture and include
-        // user_id of JWT.
         rentalCommandService.updateRental(id, name, surface, price, description);
         return ResponseEntity.ok().body(Response.builder().message("Rental updated !").build());
     }

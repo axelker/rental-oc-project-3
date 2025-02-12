@@ -2,6 +2,7 @@ package com.openclassrooms.rental.service.query;
 
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.stereotype.Service;
 
@@ -28,10 +29,12 @@ public class RentalQueryService {
     }
 
     public RentalsResponse getRentals() {
-        return RentalsResponse.builder().rentals(rentalRepository.findAll()
-                .stream()
-                .map(rentalMapper::toDto)
-                .collect(Collectors.toList())).build();
+        return RentalsResponse.builder()
+                .rentals(
+                        StreamSupport.stream(rentalRepository.findAll().spliterator(), false)
+                                .map(rentalMapper::toDto)
+                                .collect(Collectors.toList()))
+                .build();
     }
 
 }

@@ -12,7 +12,7 @@ public class RentalResponse {
     private String name;
     private double surface;
     private double price;
-    private String picture;
+    private String[] picture;
     private String description;
     private Integer owner_id;
     private LocalDateTime created_at;

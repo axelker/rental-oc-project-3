@@ -23,7 +23,7 @@ class ImageStorageServiceTest {
     @BeforeEach
     void setUp() {
         imageStorageService = new ImageStorageService();
-        ReflectionTestUtils.setField(imageStorageService, "uploadDir", tmpDir.toString());
+        ReflectionTestUtils.setField(imageStorageService, "uploadImgDir", tmpDir.toString());
 
     }
 
@@ -45,19 +45,25 @@ class ImageStorageServiceTest {
     }
 
     @Test
-    void buildTwoCompleteUrlFile_assertDifferent() {
+    void buildRandomlFileName_assertDifferent() {
         String fileName = "test-file-name.png";
 
-        String url1 = imageStorageService.buildCompleteUrlFile(fileName);
-        String url2 = imageStorageService.buildCompleteUrlFile(fileName);
+        String fileRandomName1 = imageStorageService.buildRandomFileName(fileName);
+        String fileRandomName2 = imageStorageService.buildRandomFileName(fileName);
 
-        String expectedDir = tmpDir.toString();
+        assertThat(fileRandomName1).isNotEqualTo(fileRandomName2);
+        assertThat(fileRandomName1).contains(fileName);
+        assertThat(fileRandomName2).contains(fileName);
+    }
 
-        assertThat(url1).isNotEqualTo(url2);
-        assertThat(url1).startsWith(expectedDir);
-        assertThat(url2).startsWith(expectedDir);
-        assertThat(url1).contains(fileName);
-        assertThat(url2).contains(fileName);
+    @Test
+    void buildCompletUrlFileName_assertDifferent() {
+        String fileName = "test-file-name.png";
+
+        String url = imageStorageService.buildCompleteUrlFile(fileName);
+
+        assertThat(url).contains("/storage/images");
+        assertThat(url).contains(fileName);
     }
 
     @Test

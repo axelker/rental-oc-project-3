@@ -107,7 +107,7 @@ public class RentalQueryServiceTest {
                 .name("test rental")
                 .surface(100.0)
                 .price(1500.0)
-                .picture("http://example.com/pic.jpg")
+                .picture(new String[] { "http://example.com/pic.jpg" })
                 .description("Description")
                 .build();
     }

@@ -43,7 +43,7 @@ public class RentalMapperTest {
         assertThat(rentalResponse.getName()).isEqualTo(rentalEntity.getName());
         assertThat(rentalResponse.getSurface()).isEqualTo(rentalEntity.getSurface());
         assertThat(rentalResponse.getPrice()).isEqualTo(rentalEntity.getPrice());
-        assertThat(rentalResponse.getPicture()).isEqualTo(rentalEntity.getPicture());
+        assertThat(rentalResponse.getPicture()[0]).isEqualTo(rentalEntity.getPicture());
         assertThat(rentalResponse.getDescription()).isEqualTo(rentalEntity.getDescription());
         assertThat(rentalResponse.getOwner_id()).isEqualTo(rentalEntity.getOwner_id());
         assertThat(rentalResponse.getCreated_at()).isEqualTo(rentalEntity.getCreated_at());
