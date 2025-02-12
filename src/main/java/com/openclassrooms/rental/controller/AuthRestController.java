@@ -11,9 +11,9 @@ import com.openclassrooms.rental.dto.response.UserResponse;
 import com.openclassrooms.rental.service.auth.AuthenticationService;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDateTime;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
@@ -26,16 +26,8 @@ public class AuthRestController {
     }
 
     @GetMapping("me")
-    public ResponseEntity<UserResponse> getMe() {
-        final var user = UserResponse.builder()
-                .id(1)
-                .name("Owner Name")
-                .email("test@test.com")
-                .created_at(LocalDateTime.of(2022, 2, 2, 0, 0))
-                .updated_at(LocalDateTime.of(2022, 8, 2, 0, 0))
-                .build();
-
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserResponse> getMe(Authentication authentication) {
+        return ResponseEntity.ok(authService.getUserInfo(authentication));
     }
 
     @PostMapping("login")
