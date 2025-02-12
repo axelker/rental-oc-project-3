@@ -2,11 +2,13 @@ package com.openclassrooms.rental.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
 @SuperBuilder(toBuilder = true)
+@NoArgsConstructor
 @Table(name = "rentals")
 public class RentalEntity extends Auditable {
 
@@ -26,7 +28,7 @@ public class RentalEntity extends Auditable {
     @Column(nullable = false)
     private String picture;
 
-    @Column(nullable = false)
+    @Column(length = 2000, nullable = false)
     private String description;
 
     @Column(nullable = false)

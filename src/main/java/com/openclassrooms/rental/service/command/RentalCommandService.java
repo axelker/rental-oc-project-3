@@ -28,7 +28,8 @@ public class RentalCommandService {
                         double surface,
                         double price,
                         String description,
-                        MultipartFile picture) throws IOException {
+                        MultipartFile picture,
+                        Integer userId) throws IOException {
 
                 String pictureUrl = imageStorageService.buildCompleteUrlFile(picture.getOriginalFilename());
                 rentalRepository.save(RentalEntity.builder()
@@ -37,6 +38,7 @@ public class RentalCommandService {
                                 .price(price)
                                 .description(description)
                                 .picture(pictureUrl)
+                                .owner_id(userId)
                                 .build());
                 imageStorageService.saveImage(picture, pictureUrl);
         }

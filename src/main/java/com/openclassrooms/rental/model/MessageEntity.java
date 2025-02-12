@@ -1,14 +1,14 @@
 package com.openclassrooms.rental.model;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
-
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 @Entity
 @Getter
 @SuperBuilder
+@NoArgsConstructor
 @Table(name = "messages")
 public class MessageEntity extends Auditable {
 
@@ -16,7 +16,7 @@ public class MessageEntity extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @Column(length = 2000)
     private String message;
 
     @ManyToOne

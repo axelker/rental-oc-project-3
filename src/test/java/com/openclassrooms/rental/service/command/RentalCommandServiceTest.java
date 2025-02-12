@@ -45,7 +45,7 @@ public class RentalCommandServiceTest {
                 .build();
         when(rentalRepository.save(any(RentalEntity.class))).thenReturn(savedEntity);
 
-        rentalCommandService.createRental("Test Rental", 100.0, 1500.0, "Test Description", multipartFile);
+        rentalCommandService.createRental("Test Rental", 100.0, 1500.0, "Test Description", multipartFile, 1);
 
         verify(imageStorageService).buildCompleteUrlFile(multipartFile.getOriginalFilename());
         ArgumentCaptor<RentalEntity> captor = ArgumentCaptor.forClass(RentalEntity.class);
