@@ -55,10 +55,10 @@ public class AuthenticationService {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            request.getLogin(),
+                            request.getEmail(),
                             request.getPassword()));
 
-            UserEntity user = userRepository.findByEmail(request.getLogin())
+            UserEntity user = userRepository.findByEmail(request.getEmail())
                     .orElseThrow(() -> new NoSuchElementException("User not found after authentication"));
 
             String token = jwtService.generateToken(user);
