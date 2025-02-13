@@ -4,6 +4,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import net.coobird.thumbnailator.Thumbnails;
 
 import org.slf4j.Logger;
@@ -86,7 +87,9 @@ public class ImageStorageService {
     }
 
     public String buildCompleteUrlFile(String fileName) {
-        return new StringBuilder().append(contextPath).append("/storage/images").append("/" + fileName).toString();
+        String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath().toUriString();
+        return new StringBuilder().append(baseUrl)
+                .append("/storage/images").append("/" + fileName).toString();
     }
 
     public String buildRandomFileName(String filename) {

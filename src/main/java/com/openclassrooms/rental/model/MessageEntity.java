@@ -16,7 +16,7 @@ public class MessageEntity extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(length = 2000)
+    @Column(length = 2000, nullable = false)
     private String message;
 
     @ManyToOne
