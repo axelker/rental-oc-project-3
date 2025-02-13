@@ -19,7 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@Tag(name = "Users", description = "Endpoints for managing user properties")
+@Tag(name = "Users", description = "Manage user accounts")
 @ApiResponses(value = {
         @ApiResponse(responseCode = "401", description = "Unauthorized - Token missing or invalid", content = @Content),
         @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class)))
@@ -34,7 +34,7 @@ public class UserRestController {
         this.userQueryService = userQueryService;
     }
 
-    @Operation(summary = "Get a user by ID", description = "Retrieve details of a user property using its ID.")
+    @Operation(summary = "Find a user by ID", description = "Retrieve details of a user property using its ID.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User found", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = UserResponse.class))),
             @ApiResponse(responseCode = "404", description = "User not found", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class)))

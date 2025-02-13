@@ -39,7 +39,7 @@ public class AuthRestController {
         this.authService = authService;
     }
 
-    @Operation(summary = "Get a user info authentication", description = "Retrieve details of a user property using its authentication information.")
+    @Operation(summary = "Find info of current user authenticate", description = "Retrieve details of a user using its authentication information.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User info found", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = UserResponse.class))),
             @ApiResponse(responseCode = "401", description = "Unauthorized - Token missing or invalid", content = @Content),
