@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -41,7 +42,7 @@ public class MessageRestController {
             @ApiResponse(responseCode = "400", description = "Bad Request - Invalid input", content = @Content)
     })
     @PostMapping("")
-    public ResponseEntity<Response> sendMessage(@RequestBody MessageRequest body) {
+    public ResponseEntity<Response> sendMessage(@Valid @RequestBody MessageRequest body) {
         this.messageCommandService.createMessage(body);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Response.builder().message("Message sent successfully!").build());
