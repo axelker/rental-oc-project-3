@@ -17,6 +17,9 @@ import com.openclassrooms.rental.model.UserEntity;
 @Service
 public class JWTService {
 
+    @Value("${jwt.iss}")
+    private String jwtIssuer;
+
     @Value("${jwt.expiration}")
     private long jwtExpiration;
 
@@ -29,7 +32,7 @@ public class JWTService {
     public String generateToken(UserEntity user) {
         Instant now = Instant.now();
         JwtClaimsSet claims = JwtClaimsSet.builder()
-                .issuer("self")
+                .issuer(jwtIssuer)
                 .issuedAt(now)
                 .subject(user.getUsername())
                 .claim("user_id", user.getId())
