@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@Tag(name = "Messages", description = "Endpoints for managing messages properties")
+@Tag(name = "Messages", description = "Manage messages properties")
 @ApiResponses(value = {
         @ApiResponse(responseCode = "401", description = "Unauthorized - Token missing or invalid", content = @Content),
         @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class)))
