@@ -8,7 +8,6 @@ import com.openclassrooms.rental.dto.request.AuthLoginRequest;
 import com.openclassrooms.rental.dto.request.AuthRegisterRequest;
 import com.openclassrooms.rental.dto.response.AuthResponse;
 import com.openclassrooms.rental.dto.response.ErrorResponse;
-import com.openclassrooms.rental.dto.response.Response;
 import com.openclassrooms.rental.dto.response.UserResponse;
 import com.openclassrooms.rental.service.auth.AuthenticationService;
 
@@ -18,6 +17,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.http.HttpStatus;
@@ -57,7 +57,7 @@ public class AuthRestController {
             @ApiResponse(responseCode = "401", description = "Unauthorized - Invalid credentials", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class))),
     })
     @PostMapping("login")
-    public ResponseEntity<AuthResponse> login(@RequestBody AuthLoginRequest body) {
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody AuthLoginRequest body) {
         return ResponseEntity.ok(authService.authenticate(body));
     }
 
@@ -67,7 +67,7 @@ public class AuthRestController {
             @ApiResponse(responseCode = "409", description = "Conflict : User already exist with the same email in the system.", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class))),
     })
     @PostMapping("register")
-    public ResponseEntity<AuthResponse> register(@RequestBody AuthRegisterRequest body) throws Exception {
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody AuthRegisterRequest body) throws Exception {
         return ResponseEntity.status(HttpStatus.CREATED).body(authService.register(body));
     }
 
