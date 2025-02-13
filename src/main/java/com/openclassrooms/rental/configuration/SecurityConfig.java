@@ -26,7 +26,6 @@ import com.openclassrooms.rental.service.query.UserQueryService;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    // todo: need to add complet swagger uri to properties
     @Value("${security.publicUrls}")
     private String[] publicUrls;
 

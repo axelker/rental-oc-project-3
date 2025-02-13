@@ -50,7 +50,7 @@ public class RentalCommandService {
                         String description) throws NoSuchElementException {
 
                 RentalEntity rentalToUpdate = rentalRepository.findById(id)
-                                .orElseThrow(() -> new NoSuchElementException("Rental not found for update"));
+                                .orElseThrow(() -> new NoSuchElementException("Rental not found for update."));
                 rentalRepository.save(rentalToUpdate.toBuilder()
                                 .name(name)
                                 .surface(surface)

@@ -103,6 +103,6 @@ public class RentalCommandServiceTest {
 
         NoSuchElementException ex = assertThrows(NoSuchElementException.class,
                 () -> rentalCommandService.updateRental(rentalId, "New Name", 90.0, 1300.0, "New Description"));
-        assertEquals("Rental not found for update", ex.getMessage());
+        assertEquals("Rental not found for update.", ex.getMessage());
     }
 }

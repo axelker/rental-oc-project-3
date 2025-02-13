@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
@@ -44,15 +45,13 @@ public class ImageStorageService {
         return filePath.toString();
     }
 
-    public byte[] loadImage(String fileName) throws IOException {
+    public byte[] loadImage(String fileName) throws NoSuchElementException, IOException {
         Path uploadPath = getUploadDirPath();
         Path filePath = uploadPath.resolve(fileName).normalize();
-
-        if (Files.exists(filePath) && Files.isReadable(filePath)) {
-            return Files.readAllBytes(filePath);
-        } else {
-            throw new IOException("File not found: " + fileName);
+        if (!Files.exists(filePath) || !Files.isReadable(filePath)) {
+            throw new NoSuchElementException("File not found: " + fileName);
         }
+        return Files.readAllBytes(filePath);
     }
 
     private Path getUploadDirPath() {
