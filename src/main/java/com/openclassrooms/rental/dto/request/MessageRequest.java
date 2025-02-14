@@ -13,7 +13,7 @@ public class MessageRequest {
     @Size(max = 2000)
     private String message;
     @NotNull(message = "user_id is required.")
-    private Integer user_id;
+    private Long user_id;
     @NotNull(message = "rental_id is required.")
-    private Integer rental_id;
+    private Long rental_id;
 }

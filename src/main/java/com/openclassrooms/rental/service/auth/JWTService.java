@@ -43,10 +43,10 @@ public class JWTService {
         return this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
     }
 
-    public Integer getUserId(Authentication authentication) {
+    public Long getUserId(Authentication authentication) {
         Jwt jwt = (Jwt) authentication.getPrincipal();
         Long userIdLong = jwt.getClaim("user_id");
-        return userIdLong.intValue();
+        return Long.valueOf(userIdLong);
     }
 
 }

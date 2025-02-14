@@ -3,7 +3,10 @@ package com.openclassrooms.rental.service.storage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.util.ReflectionTestUtils;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,7 +27,11 @@ class ImageStorageServiceTest {
     void setUp() {
         imageStorageService = new ImageStorageService();
         ReflectionTestUtils.setField(imageStorageService, "uploadImgDir", tmpDir.toString());
-
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.setServerName("localhost");
+        request.setServerPort(3001);
+        request.setContextPath("/api");
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
     }
 
     @Test

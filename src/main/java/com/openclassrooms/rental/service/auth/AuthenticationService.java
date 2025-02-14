@@ -41,7 +41,7 @@ public class AuthenticationService {
 
     public UserResponse getUserInfo(Authentication authentication) {
 
-        Integer userId = jwtService.getUserId(authentication);
+        Long userId = jwtService.getUserId(authentication);
         UserEntity user = userRepository.findById(userId)
                 .orElseThrow(() -> new NoSuchElementException("User not found"));
         return userMapper.toDto(user);

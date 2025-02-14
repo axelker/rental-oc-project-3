@@ -29,8 +29,8 @@ public class MessageCommandServiceTest {
     @Test
     void createMessageSuccess() {
         MessageRequest messageRequest = MessageRequest.builder()
-                .user_id(1)
-                .rental_id(2)
+                .user_id(1L)
+                .rental_id(2L)
                 .message("test message")
                 .build();
 

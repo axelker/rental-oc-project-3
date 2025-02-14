@@ -23,12 +23,12 @@ public interface MessageMapper {
     MessageEntity toEntity(MessageRequest message);
 
     @Named("mapUserById")
-    default UserEntity mapUserById(Integer userId) {
+    default UserEntity mapUserById(Long userId) {
         return userId == null ? null : UserEntity.builder().id(userId).build();
     }
 
     @Named("mapRentalById")
-    default RentalEntity mapRentalById(Integer rentalId) {
+    default RentalEntity mapRentalById(Long rentalId) {
         return rentalId == null ? null : RentalEntity.builder().id(rentalId).build();
     }
 }

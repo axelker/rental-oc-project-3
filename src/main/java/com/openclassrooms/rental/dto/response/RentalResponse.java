@@ -8,13 +8,13 @@ import lombok.Getter;
 @Getter
 @Builder
 public class RentalResponse {
-    private Integer id;
+    private Long id;
     private String name;
     private double surface;
     private double price;
     private String[] picture;
     private String description;
-    private Integer owner_id;
+    private Long owner_id;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
 }

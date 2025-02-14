@@ -24,7 +24,7 @@ public class UserMapperTest {
     @Test
     void shouldMapUserEntityToUserResponse() {
         UserEntity userEntity = UserEntity.builder()
-                .id(1)
+                .id(1L)
                 .email("test@test.fr")
                 .name("test")
                 .created_at(LocalDateTime.now())
