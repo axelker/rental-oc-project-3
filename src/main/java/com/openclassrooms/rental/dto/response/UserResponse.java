@@ -8,7 +8,7 @@ import lombok.Getter;
 @Getter
 @Builder
 public class UserResponse {
-	private Integer id;
+	private Long id;
 	private String name;
 	private String email;
 	private LocalDateTime created_at;

@@ -29,7 +29,7 @@ public class RentalCommandService {
                         double price,
                         String description,
                         MultipartFile picture,
-                        Integer userId) throws IOException {
+                        Long userId) throws IOException {
                 String randomFileName = imageStorageService.buildRandomFileName(picture.getOriginalFilename());
                 String pictureUrl = imageStorageService.buildCompleteUrlFile(randomFileName);
                 rentalRepository.save(RentalEntity.builder()
@@ -43,7 +43,7 @@ public class RentalCommandService {
                 imageStorageService.saveImage(picture, randomFileName);
         }
 
-        public void updateRental(Integer id,
+        public void updateRental(Long id,
                         String name,
                         double surface,
                         double price,

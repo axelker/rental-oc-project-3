@@ -40,7 +40,7 @@ public class UserRestController {
             @ApiResponse(responseCode = "404", description = "User not found", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class)))
     })
     @GetMapping("{id}")
-    public ResponseEntity<UserResponse> getUser(@PathVariable Integer id) {
+    public ResponseEntity<UserResponse> getUser(@PathVariable Long id) {
         return ResponseEntity.ok(userQueryService.getUserById(id));
     }
 

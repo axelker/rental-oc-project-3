@@ -39,10 +39,10 @@ public class RentalQueryServiceTest {
         RentalEntity rentalEntity = buildRentalEntity();
         RentalResponse rentalResponse = buildRentalResponse();
 
-        when(rentalRepository.findById(1)).thenReturn(Optional.of(rentalEntity));
+        when(rentalRepository.findById(1L)).thenReturn(Optional.of(rentalEntity));
         when(rentalMapper.toDto(rentalEntity)).thenReturn(rentalResponse);
 
-        RentalResponse response = rentalQueryService.getRentalById(1);
+        RentalResponse response = rentalQueryService.getRentalById(1L);
 
         assertNotNull(response);
         assertEquals(rentalEntity.getId(), response.getId());
@@ -53,10 +53,10 @@ public class RentalQueryServiceTest {
 
     @Test
     void getRentalById_shouldThrowException_whenRentalDoesNotExist() {
-        when(rentalRepository.findById(1)).thenReturn(Optional.empty());
+        when(rentalRepository.findById(1l)).thenReturn(Optional.empty());
 
         NoSuchElementException exception = assertThrows(NoSuchElementException.class, () -> {
-            rentalQueryService.getRentalById(1);
+            rentalQueryService.getRentalById(1L);
         });
         assertEquals("Rental not found", exception.getMessage());
         verify(rentalMapper, never()).toDto(any());
@@ -89,7 +89,7 @@ public class RentalQueryServiceTest {
     private RentalEntity buildRentalEntity() {
         LocalDateTime now = LocalDateTime.now();
         return RentalEntity.builder()
-                .id(1)
+                .id(1L)
                 .name("test rental")
                 .surface(100.0)
                 .price(1500.0)
@@ -97,13 +97,13 @@ public class RentalQueryServiceTest {
                 .description("Description")
                 .created_at(now)
                 .updated_at(now)
-                .owner_id(42)
+                .owner_id(42L)
                 .build();
     }
 
     private RentalResponse buildRentalResponse() {
         return RentalResponse.builder()
-                .id(1)
+                .id(1L)
                 .name("test rental")
                 .surface(100.0)
                 .price(1500.0)

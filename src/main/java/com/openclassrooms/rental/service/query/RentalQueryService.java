@@ -22,7 +22,7 @@ public class RentalQueryService {
         this.rentalMapper = rentalMapper;
     }
 
-    public RentalResponse getRentalById(Integer id) throws NoSuchElementException {
+    public RentalResponse getRentalById(Long id) throws NoSuchElementException {
         RentalEntity rental = rentalRepository.findById(id)
                 .orElseThrow(() -> new NoSuchElementException("Rental not found"));
         return rentalMapper.toDto(rental);

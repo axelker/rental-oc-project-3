@@ -25,7 +25,7 @@ public class RentalMapperTest {
     void shouldMapRentalEntityToRentalResponse() {
         LocalDateTime now = LocalDateTime.now();
         RentalEntity rentalEntity = RentalEntity.builder()
-                .id(1)
+                .id(1L)
                 .name("Rental 1")
                 .surface(100.0)
                 .price(1500.0)
@@ -33,7 +33,7 @@ public class RentalMapperTest {
                 .description("Description 1")
                 .created_at(now)
                 .updated_at(now)
-                .owner_id(42)
+                .owner_id(42L)
                 .build();
 
         RentalResponse rentalResponse = rentalMapper.toDto(rentalEntity);
