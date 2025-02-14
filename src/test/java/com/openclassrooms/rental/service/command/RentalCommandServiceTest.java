@@ -45,7 +45,7 @@ public class RentalCommandServiceTest {
                 .build();
         when(rentalRepository.save(any(RentalEntity.class))).thenReturn(savedEntity);
 
-        rentalCommandService.createRental("Test Rental", 100.0, 1500.0, "Test Description", multipartFile, 1);
+        rentalCommandService.createRental("Test Rental", 100.0, 1500.0, "Test Description", multipartFile, 1L);
 
         verify(imageStorageService).buildCompleteUrlFile(multipartFile.getOriginalFilename());
         ArgumentCaptor<RentalEntity> captor = ArgumentCaptor.forClass(RentalEntity.class);
@@ -61,7 +61,7 @@ public class RentalCommandServiceTest {
 
     @Test
     void testUpdateRental_successful() {
-        Integer rentalId = 1;
+        Long rentalId = 1L;
         RentalEntity existingRental = RentalEntity.builder()
                 .id(rentalId)
                 .name("Old Name")
@@ -98,7 +98,7 @@ public class RentalCommandServiceTest {
 
     @Test
     void testUpdateRental_notFound() {
-        Integer rentalId = 1;
+        Long rentalId = 1L;
         when(rentalRepository.findById(rentalId)).thenReturn(Optional.empty());
 
         NoSuchElementException ex = assertThrows(NoSuchElementException.class,

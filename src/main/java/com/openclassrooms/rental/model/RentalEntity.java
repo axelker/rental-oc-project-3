@@ -14,7 +14,7 @@ public class RentalEntity extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
@@ -32,5 +32,5 @@ public class RentalEntity extends Auditable {
     private String description;
 
     @Column(nullable = false)
-    private Integer owner_id;
+    private Long owner_id;
 }

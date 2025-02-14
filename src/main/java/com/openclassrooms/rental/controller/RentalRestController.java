@@ -65,7 +65,7 @@ public class RentalRestController {
                         @ApiResponse(responseCode = "404", description = "Rental not found", content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = ErrorResponse.class)))
         })
         @GetMapping("{id}")
-        public ResponseEntity<RentalResponse> getRental(@PathVariable Integer id) {
+        public ResponseEntity<RentalResponse> getRental(@PathVariable Long id) {
                 return ResponseEntity.ok(rentalQueryService.getRentalById(id));
         }
 
@@ -98,7 +98,7 @@ public class RentalRestController {
         })
         @PutMapping("{id}")
         public ResponseEntity<Response> updateRental(
-                        @PathVariable Integer id,
+                        @PathVariable Long id,
                         @RequestParam String name,
                         @RequestParam double surface,
                         @RequestParam double price,

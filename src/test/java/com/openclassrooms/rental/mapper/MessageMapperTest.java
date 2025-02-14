@@ -1,6 +1,5 @@
 package com.openclassrooms.rental.mapper;
 
-
 import org.junit.jupiter.api.Test;
 
 import com.openclassrooms.rental.dto.request.MessageRequest;
@@ -20,7 +19,7 @@ public class MessageMapperTest {
 
     @Test
     void shouldMapMapMessageRequestToMessageEntity() {
-        MessageRequest message = MessageRequest.builder().user_id(1).rental_id(2).message("test").build();
+        MessageRequest message = MessageRequest.builder().user_id(1L).rental_id(2L).message("test").build();
         MessageEntity messageEntity = messageMapper.toEntity(message);
 
         assertThat(messageEntity).isNotNull();
